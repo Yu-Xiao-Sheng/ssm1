@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://mybatis.org/schema/mybatis-spring
+http://mybatis.org/schema/mybatis-spring.xsd">
+
+<!--    daoContext.xml用于管理应用的DAO组件-->
+
+    <!--    定义数据源-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close"
+          p:driverClass="com.mysql.jdbc.Driver"
+          p:jdbcUrl="jdbc:mysql://localhost:3306/ssm1?useUnicode=true&amp;characterEncoding=UTF-8"
+          p:user="root"
+          p:password="Yg_20001008"
+    />
+
+    <!--    配置Mybatis核心组件：SqlSessionFactory
+            并为该SqlSessionFactory配置它的依赖DataSource
+            指定为Bean包下面的所有实体类注册别名-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+          p:dataSource-ref="dataSource"
+          p:typeAliasesPackage="com.yg.Bean"/>
+
+<!--    自动扫描指定包及其子包下的所有Mapper组件-->
+    <mybatis:scan base-package="com.yg.Dao"/>
+</beans>
