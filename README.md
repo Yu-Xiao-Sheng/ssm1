@@ -44,11 +44,11 @@
   </filter-mapping>
 ```
 通过web.xml提供两个重要的组件和一个过滤组件。
-* DispatcherServlet：SpringMVC的核心Servlet，负责拦截所有请求
-* ContextLoaderListener:负责在应用启动时初始化Spring容器
-* CharacterEncodingFilter：负责过滤所有请求，使用指定的字符集对请求进行处理。该过滤器主要用于解决POST请求的中文请求参数。
-其中ContextLoaderListener初始化的Spring容器被称为根容器，主要负责管理应用中的Service组件、DAO组件、DataSource等后端组件。
-而DispatcherServlet初始化的Spring容器被称为Servlet容器，主要负责配置、管理应用中的Controller、视图解析器、HandlerMapping等组件。
+1. `DispatcherServlet`：SpringMVC的核心Servlet，负责拦截所有请求
+2. `ContextLoaderListener`:负责在应用启动时初始化Spring容器
+3. `CharacterEncodingFilter`：负责过滤所有请求，使用指定的字符集对请求进行处理。该过滤器主要用于解决POST请求的中文请求参数。
+其中`ContextLoaderListener`初始化的Spring容器被称为`根容器`，主要负责管理应用中的`Service组件、DAO组件、DataSource等后端组件`。
+而`DispatcherServlet`初始化的Spring容器被称为`Servlet容器`，主要负责配置、管理应用中的`Controller、视图解析器、HandlerMapping等组件`。
 ### appContext.xml与daoContext.xml
 该实例为了方便扩展，将根容器的配置文件分为两个，其中appContext.xml作为管理应用业务的组件，主要负责加载Service组件和事务管理器等；而daoContext.xml负责加载DAO组件和DataSource数据源。虽然有两个配置文件，但是只会生成一个Spring容器
 appContext.xml
